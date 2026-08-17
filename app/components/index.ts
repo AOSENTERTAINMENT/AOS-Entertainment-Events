@@ -1,0 +1,11 @@
+export { Navbar } from './navbar';
+export { Footer } from './footer';
+export { HomePage } from './pages/home-page';
+export { AboutPage } from './pages/about-page';
+export { ClubsPartiesPage } from './pages/clubs-parties-page';
+export { CorporatePage } from './pages/corporate-page';
+export { GalleryPage } from './pages/gallery-page';
+export { ContactPage } from './pages/contact-page';
+export { DJCorkPage } from './pages/dj-cork-page';
+export { WeddingsPage } from './pages/weddings-page';
+export { PrivacyPolicyPage } from './pages/privacy-page';
