@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  /* Populated by next/font in layout.tsx (--font-inter, --font-space, --font-cormorant) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+  --color-neon-blue: #d7137f;
+  --color-neon-purple: #d7137f;
+  --color-gold: #e4ad2c;
+  --color-gold-light: #fffaf0;
+  --color-pink: #d7137f;
+  --color-slate-dark: #0F172A;
+  --color-silver: #94A3B8;
+}
+
+@layer base {
+  body {
+    @apply bg-[#050505] text-white selection:bg-neon-blue/30;
+  }
+}
+
+.wedding-theme {
+  @apply bg-white text-black selection:bg-gold/20;
+}
+
+.corporate-theme {
+  @apply bg-slate-dark text-white selection:bg-silver/20;
+}
+
+.glass {
+  @apply backdrop-blur-md bg-black/40 border border-white/10;
+}
+
+.glass-corporate {
+  @apply backdrop-blur-md bg-slate-900/60 border border-white/5;
+}
+
+.glass-light {
+  @apply backdrop-blur-md bg-white/80 border border-black/5;
+}
+
+/* Contact form on wedding page: same frosted “glass” idea as .glass, tuned for light/gold theme */
+.glass-wedding-form {
+  @apply backdrop-blur-md bg-white/90 border border-gold/25 shadow-[0_8px_32px_rgba(0,0,0,0.06)];
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(215, 19, 127, 0.3);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(215, 19, 127, 0.3);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(228, 173, 44, 0.2);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink to-gold;
+}
+
+.text-gold-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-gold to-[#b88a24];
+}
+
+/* Native date inputs ignore normal width on mobile WebKit; keep inside form like other fields */
+@layer components {
+  .contact-form-date {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .contact-form-date::-webkit-datetime-edit-fields-wrapper {
+    min-width: 0;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
+  .contact-form-date::-webkit-datetime-edit {
+    padding: 0.125rem 0.25rem;
+    min-width: 0;
+  }
+
+  .contact-form-date::-webkit-calendar-picker-indicator {
+    flex-shrink: 0;
+    margin-inline-start: 0.25rem;
+  }
+}
