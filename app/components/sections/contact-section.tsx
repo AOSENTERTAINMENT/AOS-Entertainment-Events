@@ -223,7 +223,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
                 height: '1430px',
                 minHeight: '1430px',
               }}
-              scrolling="no"
+              scrolling="yes"
             />
           </div>
         </div>
