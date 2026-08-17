@@ -151,10 +151,11 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
     <section id="contact" className={`py-16 sm:py-24 relative overflow-x-clip ${isWeddingPage ? 'bg-gold-light/40 border-y border-gold/10' : ''}`} aria-labelledby="contact-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full min-w-0">
         
-        {/* Changed from lg:grid-cols-2 to flex-col for full-width stacking */}
+        {/* Full width flex-col layout */}
         <div className="flex flex-col gap-10 lg:gap-16 min-w-0">
           
-          <div className="min-w-0 w-full max-w-4xl">
+          {/* Centered text container */}
+          <div className="min-w-0 w-full max-w-4xl mx-auto flex flex-col items-center text-center">
             {isStandalonePage ? (
               <h1 id="contact-heading" className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 sm:mb-8 leading-[1.1] sm:leading-tight break-words hyphens-auto ${isWeddingPage ? 'text-black' : ''}`}>
                 LET&apos;S MAKE YOUR EVENT <span className="text-gradient">UNFORGETTABLE.</span>
@@ -164,7 +165,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
                 LET&apos;S MAKE YOUR EVENT <span className="text-gradient">UNFORGETTABLE.</span>
               </h2>
             )}
-            <p className={`text-base sm:text-lg md:text-xl mb-8 sm:mb-12 leading-relaxed ${isWeddingPage ? 'text-black/70' : 'text-white/60'}`}>
+            <p className={`text-base sm:text-lg md:text-xl mb-8 sm:mb-12 leading-relaxed max-w-2xl ${isWeddingPage ? 'text-black/70' : 'text-white/60'}`}>
               Dates fill up fast, especially for wedding season.{' '}
               <Link href="/weddings" className={isWeddingPage ? 'text-gold font-semibold hover:underline' : 'text-pink hover:underline'}>
                 Book your Wedding DJ
@@ -180,31 +181,31 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
               — get in touch today to secure your booking.
             </p>
 
-            {/* Changed from vertical stack to 3-column grid for desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12 w-full">
-              <a href="tel:0858108000" className="flex items-start sm:items-center gap-4 sm:gap-6 group min-w-0">
+            {/* Symmetrical, centered 3-column grid for desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mt-4 sm:mt-8 w-full">
+              <a href="tel:0858108000" className="flex flex-col items-center gap-4 group min-w-0">
                 <div className={`shrink-0 ${contactIconBox('pink')}`}>
                   <Phone className="w-6 h-6" aria-hidden />
                 </div>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 text-center">
                   <p className={contactMeta}>Call / WhatsApp</p>
                   <p className={`${contactValue} break-all`}>0858108000</p>
                 </div>
               </a>
-              <a href="mailto:alan@aosentertainment.ie" className="flex items-start sm:items-center gap-4 sm:gap-6 group min-w-0">
+              <a href="mailto:alan@aosentertainment.ie" className="flex flex-col items-center gap-4 group min-w-0">
                 <div className={`shrink-0 ${contactIconBox('gold')}`}>
                   <Mail className="w-6 h-6" aria-hidden />
                 </div>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 text-center">
                   <p className={contactMeta}>Email</p>
                   <p className={`${contactValue} break-all`}>alan@aosentertainment.ie</p>
                 </div>
               </a>
-              <a href="https://www.facebook.com/DJAlanOSullivan/" target="_blank" rel="noopener noreferrer" className="flex items-start sm:items-center gap-4 sm:gap-6 group min-w-0">
+              <a href="https://www.facebook.com/DJAlanOSullivan/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-4 group min-w-0">
                 <div className={`shrink-0 ${contactIconBox('pink')}`}>
                   <Facebook className="w-6 h-6" aria-hidden />
                 </div>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 text-center">
                   <p className={contactMeta}>Social</p>
                   <p className={`${contactValue} break-words`}>@djalanosullivan</p>
                 </div>
@@ -212,6 +213,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
             </div>
           </div>
 
+          {/* Full-width Planning Beats Form */}
           <div className={`p-4 sm:p-6 md:p-8 lg:p-12 rounded-2xl sm:rounded-3xl md:rounded-[40px] relative w-full min-w-0 max-w-full box-border ${isWeddingPage ? 'glass-wedding-form' : 'glass'}`}>
             <iframe
               data-pb-form=""
