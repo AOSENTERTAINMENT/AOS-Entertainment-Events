@@ -11,6 +11,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
 
   // Safely inject Planning Beats form script logic on the client-side
   useEffect(() => {
+    // Cast window to any to prevent TypeScript strict-mode errors on custom properties
     const win = window as any;
     if (win.__pbFormResize) return;
     win.__pbFormResize = 1;
@@ -24,6 +25,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
       win.dataLayer = win.dataLayer || [];
       if (!win.gtag) {
         win.gtag = function () {
+          // eslint-disable-next-line prefer-rest-params
           win.dataLayer.push(arguments);
         };
       }
@@ -41,9 +43,10 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
 
     function pbFbq(pid: string) {
       if (!win.fbq) {
-        (function (f: any, b, e, v) {
+        (function (f: any, b: Document, e: string, v: string) {
           if (f.fbq) return;
           const n: any = (f.fbq = function () {
+            // eslint-disable-next-line prefer-rest-params
             n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
           });
           if (!f._fbq) f._fbq = n;
@@ -55,7 +58,9 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
           t.async = true;
           t.src = v;
           const s = b.getElementsByTagName(e)[0];
-          s.parentNode!.insertBefore(t, s);
+          if (s && s.parentNode) {
+            s.parentNode.insertBefore(t, s);
+          }
         })(win, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
       }
       win.fbq('init', pid);
@@ -130,7 +135,7 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
     isWeddingPage
       ? `w-14 h-14 rounded-2xl glass-light border border-gold/20 flex items-center justify-center transition-all ${accent === 'gold' ? 'text-gold group-hover:bg-gold group-hover:text-white' : 'text-pink group-hover:bg-pink group-hover:text-white'}`
       : `w-14 h-14 rounded-2xl glass flex items-center justify-center ${accent === 'gold' ? 'text-gold group-hover:bg-gold group-hover:text-black' : 'text-pink group-hover:bg-pink group-hover:text-white'} transition-all`;
-  
+
   const contactMeta = isWeddingPage ? 'text-sm text-black/45 uppercase tracking-widest font-bold' : 'text-sm text-white/40 uppercase tracking-widest font-bold';
   const contactValue = isWeddingPage ? 'text-xl font-bold text-black' : 'text-xl font-bold';
 
@@ -193,22 +198,22 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
               </a>
             </div>
           </div>
-          
+
           <div className={`p-4 sm:p-6 md:p-8 lg:p-12 rounded-2xl sm:rounded-3xl md:rounded-[40px] relative w-full min-w-0 max-w-full box-border ${isWeddingPage ? 'glass-wedding-form' : 'glass'}`}>
-            <style>{`
-              iframe[data-pb-form] { height: 1430px; }
-              @media(min-width:641px) { iframe[data-pb-form] { height: 1430px; } }
-            `}</style>
-            
             <iframe
               data-pb-form=""
               src="https://aosentertainment.planningbeats.com/form/c4e27211-c857-456c-8f23-c82b83d5afc7"
               title="Enquiry form"
               loading="lazy"
               width="100%"
-              height="1430"
               allowTransparency={true}
-              style={{ border: 'none', display: 'block', background: 'transparent' }}
+              style={{
+                border: 'none',
+                display: 'block',
+                background: 'transparent',
+                height: '1430px',
+                minHeight: '1430px',
+              }}
               scrolling="no"
             />
           </div>
