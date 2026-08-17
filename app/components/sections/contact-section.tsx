@@ -103,7 +103,6 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
         try {
           f.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } catch {
-          // Removed the unused "_" parameter here to satisfy strict linting
           f.scrollIntoView();
         }
       } else if (e.data.type === 'pb-form-conversion') {
@@ -151,8 +150,11 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
   return (
     <section id="contact" className={`py-16 sm:py-24 relative overflow-x-clip ${isWeddingPage ? 'bg-gold-light/40 border-y border-gold/10' : ''}`} aria-labelledby="contact-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full min-w-0">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 min-w-0">
-          <div className="min-w-0">
+        
+        {/* Changed from lg:grid-cols-2 to flex-col for full-width stacking */}
+        <div className="flex flex-col gap-10 lg:gap-16 min-w-0">
+          
+          <div className="min-w-0 w-full max-w-4xl">
             {isStandalonePage ? (
               <h1 id="contact-heading" className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 sm:mb-8 leading-[1.1] sm:leading-tight break-words hyphens-auto ${isWeddingPage ? 'text-black' : ''}`}>
                 LET&apos;S MAKE YOUR EVENT <span className="text-gradient">UNFORGETTABLE.</span>
@@ -177,7 +179,9 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
               </Link>{' '}
               — get in touch today to secure your booking.
             </p>
-            <div className="space-y-6 sm:space-y-8">
+
+            {/* Changed from vertical stack to 3-column grid for desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12 w-full">
               <a href="tel:0858108000" className="flex items-start sm:items-center gap-4 sm:gap-6 group min-w-0">
                 <div className={`shrink-0 ${contactIconBox('pink')}`}>
                   <Phone className="w-6 h-6" aria-hidden />
