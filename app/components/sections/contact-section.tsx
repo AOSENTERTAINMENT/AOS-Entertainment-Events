@@ -11,8 +11,9 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
 
   // Safely inject Planning Beats form script logic on the client-side
   useEffect(() => {
-    // Cast window to any to prevent TypeScript strict-mode errors on custom properties
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const win = window as any;
+    
     if (win.__pbFormResize) return;
     win.__pbFormResize = 1;
     const fitFrames: HTMLIFrameElement[] = [];
@@ -24,9 +25,8 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
     function pbGtag(id: string) {
       win.dataLayer = win.dataLayer || [];
       if (!win.gtag) {
-        win.gtag = function () {
-          // eslint-disable-next-line prefer-rest-params
-          win.dataLayer.push(arguments);
+        win.gtag = function (...args: unknown[]) {
+          win.dataLayer.push(args);
         };
       }
       win.__pbGtag = win.__pbGtag || {};
@@ -43,17 +43,25 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
 
     function pbFbq(pid: string) {
       if (!win.fbq) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (function (f: any, b: Document, e: string, v: string) {
           if (f.fbq) return;
-          const n: any = (f.fbq = function () {
-            // eslint-disable-next-line prefer-rest-params
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const n: any = (f.fbq = function (...args: unknown[]) {
+            if (n.callMethod) {
+              n.callMethod(...args);
+            } else {
+              n.queue.push(args);
+            }
           });
+          
           if (!f._fbq) f._fbq = n;
           n.push = n;
           n.loaded = true;
           n.version = '2.0';
           n.queue = [];
+          
           const t = b.createElement(e) as HTMLScriptElement;
           t.async = true;
           t.src = v;
@@ -94,7 +102,8 @@ export function Contact({ isStandalonePage }: { isStandalonePage?: boolean } = {
       } else if (e.data.type === 'pb-form-scroll') {
         try {
           f.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } catch (_) {
+        } catch {
+          // Removed the unused "_" parameter here to satisfy strict linting
           f.scrollIntoView();
         }
       } else if (e.data.type === 'pb-form-conversion') {
